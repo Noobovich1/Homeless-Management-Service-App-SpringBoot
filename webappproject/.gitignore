@@ -53,3 +53,4 @@ application-dev.properties
 
 node_modules/
 dist/
+.vscode
