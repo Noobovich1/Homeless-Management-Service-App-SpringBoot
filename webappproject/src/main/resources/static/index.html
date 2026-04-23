@@ -3,19 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spring Boot Monolith Web App</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Homeless Management Service</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
-<body>
-    <div class="container">
-        <h1>My Java Web App</h1>
-        <button id="fetchDataBtn">Get Data via AJAX</button>
-        
-        <div id="resultBox" class="hidden">
-            <p id="messageText"></p>
+<body class="dark-mode">
+
+    <!-- Theme Toggle -->
+    <div class="theme-toggle-container" style="position: fixed; top: 1.5rem; right: 1.5rem; z-index: 9999;">
+        <button onclick="toggleTheme()" class="apple-btn-secondary">🌓 Toggle Theme</button>
+    </div>
+
+    <!-- VIEW: LOGIN -->
+    <div id="login-view" class="section-hero">
+        <div class="apple-card" style="width: 320px; text-align: center;">
+            <h2>System Login</h2>
+            <input type="text" id="username" placeholder="Username" class="apple-input" style="margin: 1rem 0;">
+            <input type="password" id="password" placeholder="Password" class="apple-input" style="margin-bottom: 2rem;">
+            <button id="loginBtn" class="apple-btn-primary" style="width: 100%;">Enter Portal</button>
+            <button onclick="showView('donate-view')" class="apple-pill-link" style="margin-top: 1.5rem; border:none; background:transparent;">Make a Donation &rarr;</button>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- VIEW: DONATION PORTAL -->
+    <div id="donate-view" class="section-hero" style="display: none;">
+        <div class="apple-card" style="max-width: 450px; width: 90%;">
+            <h2 style="text-align: center; margin-bottom: 2rem;">Public Support</h2>
+            <input type="text" id="donName" placeholder="Preferred Name" class="apple-input" style="margin-bottom: 1rem;">
+            <select id="donCategory" class="apple-input" style="margin-bottom: 1rem;">
+                <option value="Meals">Meal Program</option>
+                <option value="Beds">Housing Fund</option>
+            </select>
+            <input type="number" id="donAmount" placeholder="Amount ($)" class="apple-input" style="margin-bottom: 1rem;" value="10">
+            <button onclick="submitDonation()" class="apple-btn-primary" style="width: 100%;">Donate Now</button>
+            <button onclick="showView('login-view')" class="apple-pill-link" style="margin-top: 1rem; border:none; background:transparent;">Back to Home</button>
+        </div>
+    </div>
+
+    <!-- VIEW: MAIN DASHBOARD -->
+    <div id="app-view" style="display: none; min-height: 100vh;">
+        <aside class="apple-sidebar">
+            <div class="sidebar-logo">Admin Center</div>
+            <div id="user-info" class="sidebar-user">Role: User</div>
+            <nav class="sidebar-nav">
+                <button class="sidebar-btn" onclick="switchTab('dashboard', event)">Dashboard</button>
+                <button class="sidebar-btn" onclick="switchTab('clients', event)">Clients</button>
+                <button class="sidebar-btn" onclick="switchTab('tasks', event)">Tasks</button>
+                <button class="sidebar-btn" onclick="switchTab('admin', event)" id="nav-admin" style="display:none;">System Admin</button>
+            </nav>
+            <button class="sidebar-logout" onclick="logout()">Logout</button>
+        </aside>
+
+        <main class="page-container" style="flex: 1;">
+            <!-- TAB: DASHBOARD -->
+            <section id="tab-dashboard" class="tab-pane" style="display:none;">
+                <div class="apple-card elevated" style="margin-bottom: 2rem;">
+                    <h3>Resource Monitor</h3>
+                    <div id="resource-list"></div>
+                </div>
+                <div class="apple-card elevated">
+                    <h3>Recent Donations</h3>
+                    <div id="donation-list"></div>
+                </div>
+            </section>
+
+            <!-- TAB: CLIENTS -->
+            <section id="tab-clients" class="tab-pane" style="display:none;">
+                <div class="apple-card elevated">
+                    <h3>Client Intake</h3>
+                    <div style="display: flex; gap: 10px; margin: 1rem 0;">
+                        <input id="clientFN" placeholder="First Name" class="apple-input">
+                        <input id="clientLN" placeholder="Last Name" class="apple-input">
+                        <button onclick="registerClient()" class="apple-btn-primary">Register</button>
+                    </div>
+                    <div id="client-list"></div>
+                </div>
+            </section>
+
+            <!-- TAB: TASKS -->
+            <section id="tab-tasks" class="tab-pane" style="display:none;">
+                <div class="apple-card elevated">
+                    <h3>Field Tasks</h3>
+                    <div style="display: flex; gap: 10px; margin: 1rem 0;">
+                        <input id="taskTitle" placeholder="New Task..." class="apple-input">
+                        <select id="taskType" class="apple-input" style="width: 120px;">
+                            <option>General</option>
+                            <option>Clinical</option>
+                        </select>
+                        <button onclick="addTask()" class="apple-btn-dark">Assign</button>
+                    </div>
+                    <div id="task-list"></div>
+                </div>
+            </section>
+
+            <!-- TAB: ADMIN -->
+            <section id="tab-admin" class="tab-pane" style="display:none;">
+                <div class="apple-card elevated" style="margin-bottom: 2rem;">
+                    <h3>System Administration</h3>
+                    <div style="display: flex; gap: 10px; margin: 1rem 0;">
+                        <input id="newUName" placeholder="Username" class="apple-input">
+                        <input id="newUPass" type="password" placeholder="Password" class="apple-input">
+                        <button onclick="addUser()" class="apple-btn-dark">Add User</button>
+                    </div>
+                    <div id="user-list"></div>
+                </div>
+                <div class="apple-card elevated">
+                    <h3>Audit Logs</h3>
+                    <div id="audit-list"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="/script.js"></script>
 </body>
 </html>

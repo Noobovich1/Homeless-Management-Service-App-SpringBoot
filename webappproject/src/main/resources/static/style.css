@@ -1,29 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --bg-color: #050505;
+  --primary: #3b82f6;
+  --secondary: #0ea5e9;
+  --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #0ea5e9 100%);
+  --accent-hover: linear-gradient(135deg, #2563eb 0%, #0284c7 100%);
+  --apple-blue: #0ea5e9; 
+  --link-blue: #7dd3fc;
+  --light-gray: rgba(255,255,255,0.05); 
+  --near-black: #ffffff;
+  --glass-bg: rgba(20, 20, 22, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 24px 40px -4px rgba(0, 0, 0, 0.4);
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    text-align: center;
-    padding: 50px;
+  margin: 0; font-family: 'Inter', system-ui, sans-serif; color: #f1f5f9;
+  background-color: var(--bg-color);
+  background-image: radial-gradient(ellipse at 10% 0%, rgba(59, 130, 246, 0.15) 0%, transparent 60%), radial-gradient(ellipse at 90% 100%, rgba(14, 165, 233, 0.15) 0%, transparent 60%), radial-gradient(ellipse at 50% 50%, rgba(2, 132, 199, 0.08) 0%, transparent 50%);
+  background-attachment: fixed; font-size: 15px; min-height: 100vh;
 }
-.container {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-    display: inline-block;
+
+h1, h2, h3, h4 {
+  font-family: 'Outfit', system-ui, sans-serif; margin: 0; font-weight: 700;
+  background: linear-gradient(135deg, #7dd3fc 0%, #3b82f6 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; color: #7dd3fc;
 }
-button {
-    padding: 10px 15px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+h2 { font-size: 2.25rem; } h3 { font-size: 1.5rem; } h4 { font-size: 1.1rem; }
+.text-caption { font-size: 0.85rem; color: rgba(255, 255, 255, 0.5) !important; margin:0;}
+
+.page-container { max-width: 1400px; margin: 0 auto; padding: 3rem 2rem; }
+.section-hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+
+.apple-card {
+  background: var(--glass-bg); backdrop-filter: blur(24px); border: 1px solid var(--glass-border);
+  border-radius: 20px; padding: 2rem; box-shadow: var(--glass-shadow); transition: 0.4s;
 }
-button:hover { background-color: #0056b3; }
-.hidden { display: none; }
-#resultBox {
-    margin-top: 20px;
-    padding: 15px;
-    background-color: #e2f0d9;
-    border-left: 5px solid #548235;
+.apple-card:hover { transform: translateY(-4px); box-shadow: 0 32px 48px -8px rgba(0, 0, 0, 0.5); border-color: rgba(255, 255, 255, 0.12); }
+
+.apple-btn-primary { background: var(--accent-gradient); color: white; padding: 12px 24px; border-radius: 12px; border: none; font-weight: 600; cursor: pointer; transition: 0.3s; }
+.apple-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px -4px rgba(14, 165, 233, 0.6); }
+.apple-btn-secondary, .apple-btn-dark { background: rgba(255, 255, 255, 0.03); color: #fff; padding: 8px 16px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.1); cursor: pointer; }
+.apple-btn-secondary:hover { background: rgba(255, 255, 255, 0.1); }
+.apple-pill-link { color: var(--link-blue); cursor: pointer; text-decoration: none; font-weight: bold;}
+
+.apple-input { background: rgba(0, 0, 0, 0.2); color: #fff; padding: 12px 16px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); width: 100%; box-sizing: border-box; outline: none; }
+.apple-input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); }
+.apple-input option { background: #111; color: #fff; }
+
+.apple-sidebar { width: 250px; background: rgba(5, 5, 5, 0.7); backdrop-filter: blur(24px); border-right: 1px solid rgba(255, 255, 255, 0.05); display: flex; flex-direction: column; padding: 2rem; position: sticky; top: 0; height: 100vh; box-sizing: border-box; }
+.sidebar-logo { font-size: 1.5rem; font-weight: bold; color: #7dd3fc; margin-bottom: 0.5rem; }
+.sidebar-user { font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 1rem; }
+.sidebar-nav { display: flex; flex-direction: column; gap: 0.5rem; flex: 1; }
+.sidebar-btn { background: transparent; color: rgba(255,255,255,0.7); border: none; text-align: left; padding: 12px 16px; border-radius: 12px; cursor: pointer; font-size: 1rem; transition: 0.2s; }
+.sidebar-btn:hover { background: rgba(255,255,255,0.05); color: #fff; }
+.sidebar-btn.active { background: var(--primary); color: #fff; }
+.sidebar-logout { background: rgba(239, 68, 68, 0.1); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.2); padding: 10px; border-radius: 10px; cursor: pointer; font-weight: 600; }
+
+.table-row-item { border-bottom: 1px solid rgba(255, 255, 255, 0.04); padding: 12px 0; display: flex; justify-content: space-between; align-items: center;}
+
+/* Light Mode */
+body.light-mode { --bg-color: #f8fafc; --glass-bg: rgba(255, 255, 255, 0.8); --glass-border: rgba(0, 0, 0, 0.05); color: #334155; }
+body.light-mode h1, body.light-mode h2, body.light-mode h3, body.light-mode h4 { color: #0f172a; -webkit-text-fill-color: #0f172a; }
+body.light-mode .apple-sidebar { background: rgba(255, 255, 255, 0.8); border-right: 1px solid rgba(0,0,0,0.05); }
+body.light-mode .apple-input { background: rgba(255, 255, 255, 0.5); color: #000; border: 1px solid rgba(0,0,0,0.1); }
+body.light-mode .apple-input option { background: #fff; color: #000; }
+body.light-mode .sidebar-btn { color: #333; }
+body.light-mode .sidebar-btn.active { color: #fff; }
+body.light-mode .apple-btn-secondary, body.light-mode .apple-btn-dark { color:#333; border: 1px solid rgba(0,0,0,0.1); background:transparent;}
+
+/* FIX FOR TOGGLE OVERLAP */
+.theme-toggle-container {
+    position: fixed; top: 1.5rem; right: 1.5rem; z-index: 9999;
+    background: transparent; padding: 10px; cursor: pointer;
 }
+
+/* FIX: Ensure light mode applies to the whole body */
+body.light-mode { background-color: #f8fafc; color: #334155; }
+body.light-mode .apple-card { background: rgba(255, 255, 255, 0.9); color: #334155; }
+body.light-mode h1, body.light-mode h2, body.light-mode h3 { color: #0f172a; -webkit-text-fill-color: #0f172a; }
+
+/* Table Row Fix */
+.table-row-item { display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+body.light-mode .table-row-item { border-bottom: 1px solid rgba(0,0,0,0.1); }
